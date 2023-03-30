@@ -1,0 +1,60 @@
+计算素数
+#include<iostream>
+#include<cmath>
+using namespace std;
+bool isprime(int n)
+{   int i=2;
+    while(n>i)
+    {
+
+        if(n%i!=0)
+        {
+            i++;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return true;
+
+
+}
+int main()
+{
+    int n,i;
+    i=2;
+    cin>>n;
+    if(isprime(n))
+    {
+        cout<<n<<endl;
+    }
+    return 0;
+}
+第二种
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool isprime(int n) {
+    if (n < 2) {
+        return false;
+    }
+    for (int i = 2; i <= sqrt(n); i++) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    if (isprime(n)) {
+        cout << n << " is prime." << endl;
+    } else {
+        cout << n << " is not prime." << endl;
+    }
+    return 0;
+}
