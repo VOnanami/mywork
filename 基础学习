@@ -1,0 +1,82 @@
+计算某年的某月某天是这一年的第一天：
+#include<iostream>
+using namespace std;
+int main()
+{
+    int year,month,day,d,i;
+    d=0;
+    cin>>year>>month>>day;
+    i=month-1;
+    while(i>0)
+    {
+        switch(i)
+        {
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            d+=31;
+            break;
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            d+=30;
+            break;
+        case 2:
+            if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+            {
+                d += 29;
+            }
+            else
+            {
+                d+= 28;
+            }
+            break;
+        default:
+            break;
+        }
+        i--;
+    }
+      d=day+d;
+    cout<<d<<endl;
+    return 0;
+}
+第二种写法
+#include <iostream>
+using namespace std;
+int main() {
+    int month, day, year, totalDays = 0;
+    cin >> month >> day >> year;
+
+    // 累加前面几个月的天数
+    for (int i = 1; i < month; i++) {
+        switch(i) {
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                totalDays += 31;
+                break;
+            case 4: case 6: case 9: case 11:
+                totalDays += 30;
+                break;
+            case 2:
+                if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+                    totalDays += 29;
+                } else {
+                    totalDays += 28;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    // 加上当月的天数
+    totalDays += day;
+
+    cout << "这是这一年的第 " << totalDays << " 天" << endl;
+
+    return 0;
+}
