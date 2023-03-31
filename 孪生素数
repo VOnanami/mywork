@@ -1,0 +1,38 @@
+孪生素数（判断是素数的时候多少有点问题）
+#include <iostream>
+#include<cmath>
+using namespace std;
+bool Is_prime(int n)
+{
+    int i=5;
+    if(n==1) return false;
+    if(n==2||n==3) return true;
+    if(n%6!=1&&n%6!=5) return false;
+    while (i * i <= n)   // 只需要判断到根号n即可
+    {
+        if (n % i == 0 || n % (i + 2) == 0)   // 只需要判断6n-1和6n+1的情况
+        {
+            return false;
+        }
+        i += 6;
+    }
+    return true;
+}
+int main()
+{
+    int n;
+    cin>>n;
+    while(n>1)
+    {
+        if(Is_prime(n)&&Is_prime(n-2))
+        {
+            cout<<n<<' '<<n-2<<endl;
+            break;
+        }
+        else
+        {
+            n-=2;
+        }
+    }
+    return 0;
+}
