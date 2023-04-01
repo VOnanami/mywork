@@ -1,0 +1,44 @@
+哥德巴赫猜想
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool isPrime(int n)
+{
+    if (n < 2)
+    {
+        return false;
+    }
+    for (int i = 2; i <= sqrt(n); i++)
+    {
+        if (n % i == 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    if (n % 2 == 0)
+    {
+        int i = 3;
+        while (i <n)
+        {
+            if (!isPrime(i) || !isPrime(n-i))
+            {
+                i+=2;
+
+            }
+            else
+            {
+                cout << i << ' ' << n-i << endl;
+                break;
+            }
+        }
+    }
+    return 0;
+}
