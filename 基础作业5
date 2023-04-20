@@ -1,0 +1,49 @@
+编写一个素数的对象
+#include<iostream>
+#include<cmath>
+using namespace std;
+class PrimeGenerator
+{
+public:
+    void setPrimeGenerator(int a,int b);
+    void getprimeSeq();
+private:
+    int a,b;
+};
+bool f(int a)
+{
+    bool flag = true;
+    int i = a - 1;
+    while (i >= 2)
+    {
+        if (a % i == 0)
+            flag = false;
+        i--;
+    }
+    return flag;
+}
+void PrimeGenerator::setPrimeGenerator(int a,int b)
+{
+    this ->a=a;
+    this ->b=b;
+}
+void PrimeGenerator::getprimeSeq()
+{
+    int i,l;
+    i=max(a,b);
+    l=min(a,b);
+    for (; l<=i; l++)
+    {
+        if (f(l))
+        {
+            cout<<l<<' ';
+        }
+    }
+}
+int main(){
+    int a,b;
+    cin>>a>>b;
+    PrimeGenerator the;
+    the.setPrimeGenerator(a,b);
+    the.getprimeSeq();
+    return 0;}
