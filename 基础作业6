@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class Student
+{
+public:
+    Student(int stu_id,string name,int age);
+    static void show_Student_total_stunum();
+    void show();
+private:
+    int id,a;
+    string n;
+    static int total_stunum;
+};
+int Student::total_stunum = 0;
+Student::Student(int stu_id,string name,int age)
+{
+    id=stu_id;
+    n=name;
+    a=age;
+    total_stunum++;
+}
+void Student::show()
+{
+    cout<<id<<' '<<n<<' '<<a<<endl;
+}
+void Student::show_Student_total_stunum()
+{
+    cout<<"共有"<<total_stunum<<"个学生"<<endl;
+}
+int main()
+{
+    int id,a;
+    string n;
+    cin>>id>>n>>a;
+    Student the1(1000,"张三",32);
+    Student the2(1001,"李四",31);
+    Student the3(1003,"王五",28);
+    Student the4(id,n,a);
+    the1.show();
+    the2.show();
+    the3.show();
+    the4.show();
+    Student::show_Student_total_stunum();
+    return 0;
+}
+在类外定义静态成员变量 int static total_stunum=0; 的时候，应该去掉 static 中的 static 关键字，因为静态成员变量在类内已经声明为静态的了，不需要重复声明
+为什么void放在static之后
+在C++中，成员函数可以被声明为静态函数。静态函数被称为类函数，它们属于类，而不是属于任何特定的对象。静态函数可以被调用，而无需创建对象。因此，当定义一个静态成员函数时，需要在函数声明前加上static关键字。
+
+关于void关键字的位置，它是函数返回类型的一部分，应该出现在函数名前面。而static关键字表示静态函数，是函数的修饰符，应该出现在返回类型前面，因此void放在static之后。
