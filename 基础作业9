@@ -1,0 +1,51 @@
+从键盘输入一个六位数，实现对数据的加密。加密原则为：每位数字都加上5，然后用和除以9 的余数代替该数字；再将数据的各位数字折半交换得到加密结果。
+【输入形式】
+
+一个六位数；
+
+
+【输出形式】
+
+加密结果；
+
+
+【样例输入】
+
+123456
+
+【样例输出】
+
+210876
+#include<iostream>
+#include<cmath>
+using namespace std;
+void data_encrypt(int n)
+{
+    int encrypt_data = 0;
+    int i = 0;
+    while (n > 0)
+    {
+        int k = ((n % 10)+ 5) % 9;
+        n = n / 10;
+        encrypt_data = encrypt_data + k * pow(10, i);
+        i++;
+
+    }
+    int l = 0;
+    while (encrypt_data > 0)
+    {
+        l = (encrypt_data % 10) * pow(10, i-1) + l;
+        encrypt_data = encrypt_data / 10;
+        i--;
+    }
+    cout << l<< endl;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    data_encrypt(n);
+    return 0;
+}
+
+
