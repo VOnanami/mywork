@@ -1,0 +1,46 @@
+数据在传递过程中需要加密，加密规则如下：                                  123456
+     首先将数据倒序，                                                   654321
+     然后后将第一位和最后一位数字交换。                                   154326
+     请任意给定一个6位的整数，然后将加密后的结果打印出来。
+
+
+【输入形式】
+
+任意给定一个6位的整数
+
+
+【输出形式】
+
+加密后的结果
+
+
+【样例输入】
+
+123456
+
+【样例输出】
+
+154326
+#include<iostream>
+#include<cmath>
+using namespace std;
+void encrypt(int n)
+{
+    int last_one=n%10;
+    n=n/10;
+    int i=1;
+    int revered_n=0;
+    while(n>=10){
+        revered_n=(n%10+revered_n)*10;
+        n=n/10;
+        i++;
+    }
+    revered_n=n*pow(10,i)+revered_n+last_one;
+    cout<<revered_n<<endl;}
+int main(){
+    int n;
+    cin>>n;
+    encrypt(n);
+    return 0;
+
+}
