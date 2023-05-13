@@ -1,0 +1,51 @@
+随机数的生成在计算机应用十分广泛，冯诺依曼提出了一种随机数生成方法，其中一些步骤的方法如下：
+
+先输入一个三位数，作为种子                                                                                         123
+
+求这个种子的平方                                                                                                  15129
+
+然后取中间的三位数                                                                                                 512
+
+ 
+
+如果这个三位数种子的平方为6位数，那么取中间的四位数作为种子，例如，输入种子数888，平方后为788544，那么最后的随机数为8854
+
+
+【输入形式】
+输入一个三位数
+【输出形式】
+随机数结果
+【样例输入】
+
+123
+
+【样例输出】
+
+512
+#include<iostream>
+#include<cmath>
+using namespace std;
+void encrypt(int n)
+{
+    n=n*n;
+    n=n/10;
+    int i=0;
+    int revered_n=0;
+    while(n>=10)
+    {
+        revered_n=revered_n+n%10*pow(10,i);
+        n=n/10;
+        i++;
+    }
+    cout<<revered_n<<endl;
+}
+int main()
+{
+    int n;
+    cin>>n;
+    encrypt(n);
+    return 0;
+
+}
+
+
