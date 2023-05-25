@@ -1,0 +1,70 @@
+编写函数void fun(int x, int* pp, int* n)，它的功能是：求出x的偶数因子，并按从小到大的顺序放在pp所指向的数组中，这些因子的个数通过形参n返回（假设pp指向足够大的空间）。
+【输入形式】
+
+一个整数
+
+
+【输出形式】
+
+从小到大排列的偶数因子（空格分隔）
+
+
+【样例输入】
+
+24
+
+【样例输出】
+
+2 4 6 8 12 24
+#include <iostream>
+using namespace std;
+
+void fun(int x, int* pp, int* n)
+{
+    if (x % 2 != 0)
+    {
+        *n = 0;  // 奇数没有偶数因子，设置 n 为 0
+        return;
+    }
+
+    int count = 0;
+    for (int i = 2; i <= x; i += 2)
+    {
+        if (x % i == 0)
+        {
+            pp[count] = i;
+            count++;
+        }
+    }
+    *n = count;
+}
+
+int main()
+{
+    int x;
+    cout << "Enter an integer: ";
+    cin >> x;
+
+    int a[100];
+    int* factors = a;
+    int count;
+
+    fun(x, factors, &count);
+
+    if (count == 0)
+    {
+        cout << "The input number has no even factors." << endl;
+    }
+    else
+    {
+        cout << "Even factors of " << x << ": ";
+        for (int i = 0; i < count; i++)
+        {
+            cout << factors[i] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+最开始我也不知道指针这个东西到达怎么用的，int* n这是个指针变量，在接下来的代码我们把count的值给*n，由于*n指向&count，在地址没变的情况下，我们把形参里面的count传到到了main函数里面，这个是我个人的小小理解
