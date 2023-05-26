@@ -1,0 +1,55 @@
+编写程序用于统计一个字符串中字母、数字、空格以及其它字符的个数。在主函数中输入字符串后，调用函数：void fun(char *p, int n)，并输出统计结果。要求用指针实现。
+【输入形式】
+
+一个字符串（回车结束）；
+
+
+【输出形式】
+
+字符串中字母、数字、空格以及其它字符的个数统计结果（输出数据之间用逗号分隔）；
+
+
+【样例输入】
+
+visual c++ 6.0
+
+【样例输出】
+
+7,2,2,3
+#include <iostream>
+#include<cstring>
+using namespace std;
+
+void fun(char* p, int n) {
+    int letterCount = 0;
+    int digitCount = 0;
+    int spaceCount = 0;
+    int otherCount = 0;
+
+    for (int i = 0; i < n; i++) {
+        char c = *(p + i);
+        if (isalpha(c)) {
+            letterCount++;
+        } else if (isdigit(c)) {
+            digitCount++;
+        } else if (isspace(c)) {
+            spaceCount++;
+        } else {
+            otherCount++;
+        }
+    }
+
+    cout << letterCount << "," << digitCount << "," << spaceCount << "," << otherCount << endl;
+}
+
+int main() {
+    const int MAX_LENGTH = 100;
+    char str[MAX_LENGTH];
+    cin.getline(str, MAX_LENGTH);
+
+    int length = strlen(str);
+    fun(str, length);
+
+    return 0;
+}
+使用is+类型的时候，可以在头文件加上cctype
