@@ -1,0 +1,126 @@
+2. C++题目50：子数列查询
+设计一个新的数列类，最多可容纳500个整型元素。除了可以在外部给定数列元素外，可具有查询子数列片段的功能。在主函数中以m a1,a2,a3...am的格式输入m个初始数列（第一个数为数列初始长度，后面m个数分别为m个数列元素），然后读取要查找的子数列，格式同完整数列，n,b1,b2,b3…bn。调用数列的设定方法保存完整数列，调用子数列查找方法返回子数列在完整数列中的起始位置(位置从0开始)，如不存在，则返回-1，在主函数中输出查找结果。
+
+
+【输入形式】
+完整数列和需要调用查询的子数列
+【输出形式】
+查询的结果，如果子数列在完整数列中存在就返回位置信息，如果不存在就返回-1.
+【样例输入】
+
+10 1 2 3 4 5 6 7 8 9 10
+3 7 8 9
+
+【样例输出】
+
+6 8
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Sequence {
+private:
+    vector<int> elements;
+
+public:
+    void setSequence(int n) {
+        elements.resize(n);
+        for (int i = 0; i < n; i++) {
+            cin >> elements[i];
+        }
+    }
+
+    int findSubset(const vector<int>& subset) {
+        int n = elements.size();
+        int m = subset.size();
+
+        for (int i = 0; i < n - m + 1; i++) {
+            bool found = true;
+            for (int j = 0; j < m; j++) {
+                if (elements[i+j] != subset[j]) {
+                    found = false;
+                    break;
+                }
+            }   
+            if (found) {
+                    return i;
+            }
+        }
+
+        return -1;
+    }
+};
+
+int main() {
+    Sequence seq;
+    int n, m;
+    cin >> n;
+    seq.setSequence(n);
+
+    cin >> m;
+    vector<int> subset(m);
+    for (int i = 0; i < m; i++) {
+        cin >> subset[i];
+    }
+
+    int start = seq.findSubset(subset);
+    if (start != -1) {
+        int end = start + m - 1;
+        cout << start << " " << end << endl;
+    } else {
+        cout << -1 << endl;
+    }
+
+    return 0;
+}
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int findSubset(const vector<int>& elements, const vector<int>& subset) {
+    int n = elements.size();
+    int m = subset.size();
+
+    for (int i = 0; i < n - m + 1; i++) {
+        if (elements[i] == subset[0]) {  // 找到第一个匹配元素
+            bool found = true;
+            for (int j = 1; j < m; j++) {  // 从第二个元素开始逐一检查
+                if (elements[i + j] != subset[j]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found) {
+                return i;  // 找到完全匹配的子数列，返回起始位置
+            }
+        }
+    }
+
+    return -1;  // 子数列不存在，返回 -1
+}
+
+int main() {
+    int n, m;
+    cin >> n;
+
+    vector<int> elements(n);
+    for (int i = 0; i < n; i++) {
+        cin >> elements[i];
+    }
+
+    cin >> m;
+
+    vector<int> subset(m);
+    for (int i = 0; i < m; i++) {
+        cin >> subset[i];
+    }
+
+    int position = findSubset(elements, subset);
+
+    cout << "子数列的起始位置为: " << position << endl;
+
+    return 0;
+}
