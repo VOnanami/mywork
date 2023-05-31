@@ -1,0 +1,80 @@
+定义Point类描述点的坐标，可以输出坐标，可以求两个点之间的距离。
+
+主函数声明Point类数组Point p[5]，输入5个点的坐标，根据5个点与原点[0,0]之间的距离，由近至远排序输出距离值。
+
+
+【输入形式】
+5个点坐标
+【输出形式】
+排序后的距离值
+【样例输入】
+
+2 3
+1 3
+6 3
+8 7
+4 5
+
+【样例输出】
+
+与原点的距离：
+3.16 3.61 6.40 6.71 10.63
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+void sort(float a[], int n) {
+    int i, j, k;
+    float t;
+    for (i = 0; i < n - 1; i++) {
+        k = i;
+        for (j = i + 1; j < n; j++) {
+            if (a[k] > a[j]) {
+                k = j;
+            }
+        }
+        if (k != i) {
+            t = a[i];
+            a[i] = a[k];
+            a[k] = t;
+        }
+    }
+}
+
+class Point {
+private:
+    int x, y;
+
+public:
+    Point() : x(0), y(0) {}
+
+    float setXY(int x_, int y_) {
+        float dis;
+        x = x_;
+        y = y_;
+        dis = sqrt(pow(x, 2) + pow(y, 2));
+        return dis;
+    }
+};
+
+int main() {
+    Point p[5];
+    int x, y;
+    float a[5];
+    cout << "与原点的距离：" << endl;
+    for (int i = 0; i < 5; i++) {
+        cin >> x >> y;
+        a[i] = p[i].setXY(x, y);
+    }
+    sort(a, 5);
+    for (int i = 0; i < 5; i++) {
+        cout << fixed << setprecision(2) << a[i] << ' ';
+    }
+    return 0;
+}
+
+
+
+
