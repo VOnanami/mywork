@@ -1,0 +1,101 @@
+3. C++题目49：循环计数器
+在平面几何中，角度的范围是[0,359]，359加1就回到0，0减1就成为359。类似的还有时钟（区间为[0,11]），月份（区间为[1,12]）等。设计一个循环计数器类，可以记录计数器的上下限，同时可以进行增减操作。在主函数中分别以A、B、C、D表示不同操作类型验证这个类的各项功能，A代表初始化计数器，B代表加操作，C代表减操作，D代表退出。示例如下：
+初始化操作：A 0 359 100    （初始化一个区间为0~359的计数器，当前值为100）
+加操作：B 120
+减操作：C 50
+退出： D
+ABC三种操作都返回当前计数器的三项信息（下限 上限 当前值）
+注：为方便系统判定，区间及增减值都为整型。
+
+
+
+
+【输入形式】
+初始化参数。
+【输出形式】
+返回操作后的结果。
+【样例输入】
+
+A 0 359 100
+B 120
+C 50
+D
+
+【样例输出】
+
+0 359 100
+0 359 220
+0 359 170
+#include<iostream>
+#include<cmath>
+using namespace std;
+class CircularCounter
+{
+private:
+    int maximum,minimum,num;
+public:
+    CircularCounter():minimum(0),maximum(0),num(0) {}
+    void initiallyset(int x,int y,int n)
+    {
+        minimum=x;
+        maximum=y;
+        num=n;
+    }
+    void increase(int n)
+    {
+        if(n+num<=359)
+        {
+            num=num+n;
+        }
+
+        else
+        {
+            num=num+n-359;
+        }
+        cout<<minimum<<' '<<maximum<<' '<<num<<endl;
+    }
+    void decrease(int n)
+    {
+        if(num-n>=0)
+        {
+            num=num-n;
+        }
+        else
+        {
+            num=0;
+        }
+        cout<<minimum<<' '<<maximum<<' '<<num<<endl;
+    }
+};
+int main()
+{
+    char a;
+    int mini,maxi,n;
+    CircularCounter counter;
+    counter.initiallyset(0,395,100);
+    while(1)
+    {
+        cin>>a;
+        if(a=='A')
+        {
+            cin>>mini>>maxi>>n;
+            counter.initiallyset(mini,maxi,n);
+            cout<<mini<<' '<<maxi<<' '<<n<<endl;
+        }
+        if(a=='B')
+        {
+            cin>>n;
+            counter.increase(n);
+        }
+        if(a=='C')
+        {
+            cin>>n;
+            counter.decrease(n);
+        }
+        if(a=='D')
+        {
+            break;
+        }
+    }
+    return 0;
+}
