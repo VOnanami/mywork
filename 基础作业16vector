@@ -1,0 +1,76 @@
+#include<iostream>
+#include<cmath>
+#include<vector>
+using namespace std;
+
+class Point {
+private:
+    int x, y;
+public:
+    Point() : x(0), y(0) {}
+
+    void setxy(int x_, int y_) {
+        x = x_;
+        y = y_;
+    }
+
+    void display() {
+        cout << "[" << x << "," << y << "]" << endl;
+    }
+};
+
+void rev(vector<Point>& points) {
+    for (int i = points.size() - 1; i >= 0; i--) {
+        points[i].display();
+    }
+}
+
+int main() {
+    int x, y;
+    vector<Point> points;
+
+    // 输入点坐标并保存在 vector 中
+    while (cin >> x >> y) {
+        Point p;
+        p.setxy(x, y);
+        points.push_back(p);
+    }
+
+    // 倒置输出点坐标
+    rev(points);
+
+    return 0;
+}
+#include <iostream>
+#include <vector>
+
+class Point {
+private:
+    int x;
+    int y;
+
+public:
+    Point(int xCoord, int yCoord) : x(xCoord), y(yCoord) {}
+
+    void display() const {
+        std::cout << "[" << x << "," << y << "]" << std::endl;
+    }
+};
+
+int main() {
+    std::vector<Point> points;
+    int x, y;
+
+    // 输入点坐标，保存在vector对象中
+    while (std::cin >> x >> y) {
+        Point point(x, y);
+        points.push_back(point);
+    }
+
+    // 倒置输出点坐标
+    for (int i = points.size() - 1; i >= 0; --i) {
+        points[i].display();
+    }
+
+    return 0;
+}
