@@ -1,0 +1,61 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+class Point {
+public:
+    Point(int x, int y) {
+        this->x = x;
+        this->y = y;
+    }
+    void setPoint(int x, int y) {
+        this->x = x;
+        this->y = y;
+    }
+
+    void sortPoint() {
+        int max = x;
+        if (max > y) {
+            x = y;
+            y = max;
+
+        }
+    }
+    int getx() const {
+        return x;
+    }
+    void show() {
+        cout << x << ' ' << y << endl;
+    }
+private:
+    int x, y;
+};
+
+int main() {
+    int x, y;
+    vector<Point> points;
+    for (int i = 0; i < 3000; i++) {
+        cin >> x >> y;
+        if (x == 0 && y == 0) {
+            break;
+        }
+        else {
+            Point p(x, y);
+            p.sortPoint();
+            points.push_back(p);
+        }
+    }
+    for (int t = 0; t < points.size(); t++) {
+        for (int i = t+1; i < points.size(); i++) {
+            if (points[t].getx() > points[i].getx()) {
+                Point temp = points[t];
+                points[t] = points[i];
+                points[i] = temp;
+            }
+        }
+    }
+
+    for (int i = 0; i < points.size(); i++) {
+        points[i].show();
+    }
+    return 0;
+}
